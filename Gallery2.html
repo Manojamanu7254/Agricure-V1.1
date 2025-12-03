@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌿AgriCure Gallery</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #c5edc5;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #0a7b25;
+    }
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 10px;
+    }
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+    .navbar p {
+      font-size: 30px;
+      color: white;
+    }
+
+    /* Header Section */
+    .header {
+      background: #a5d6a7;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 20px 20px;
+    }
+    .header h1 {
+      font-weight: bold;
+      color: #000;
+    }
+
+    /* Cards */
+    .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      height: 180px;
+      object-fit: cover;
+    }
+    .card-body {
+      text-align: center;
+      background-color: #b0f4b2;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    /* Weather Section */
+    .weather-section {
+      background: #b9f0bb;
+      border-radius: 15px;
+      padding: 30px;
+      margin-top: 50px;
+      max-width: 800px;
+    }
+    .weather-box {
+      background: #c8e6c9;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #aaa;
+      width: 70%;
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+    button {
+      background-color: #0a7b25;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+    button:hover {
+      background-color: #06681e;
+    }
+
+    #weatherResult {
+      background: #f1f8e9;
+      border-radius: 8px;
+      margin-top: 20px;
+      padding: 15px;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <p>🌿AgriCure</p>
+    <div class="collapse navbar-collapse justify-content-end align-items-center">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="MainMedia.html">Media</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Header -->
+<div class="header">
+  <h1>🍁 AgriCure Gallery 🍁</h1>
+  
+</div>
+
+<!-- Vegetable Cards -->
+<div class="container my-5">
+  <div class="row g-4">
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="tomato" onclick="goToDiseasePage(this)">
+        <img src="home_image/tomato.jpg">
+        <div class="card-body">Tomato</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="brinjal" onclick="goToDiseasePage(this)">
+        <img src="home_image/brinjal.jpg">
+        <div class="card-body">Brinjal</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="cucumber" onclick="goToDiseasePage(this)">
+        <img src="home_image/cucumber.jpg">
+        <div class="card-body">Cucumber</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="corn" onclick="goToDiseasePage(this)">
+        <img src="home_image/corn.jpg">
+        <div class="card-body">Corn</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="capsicum" onclick="goToDiseasePage(this)">
+        <img src="home_image/Capsicum.jpg">
+        <div class="card-body">Capsicum</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="peas" onclick="goToDiseasePage(this)">
+        <img src="home_image/Peas.png">
+        <div class="card-body">Peas</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="pepper" onclick="goToDiseasePage(this)">
+        <img src="home_image/pepper.jpg">
+        <div class="card-body">Pepper</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card veg-card" data-veg="beans" onclick="goToDiseasePage(this)">
+        <img src="home_image/Beans.jpg">
+        <div class="card-body">Beans</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Footer -->
+<footer style="text-align:center; background:#e0e0e0; padding:15px; margin-top:40px;">
+  © AgriCure 2025. Empowering Farmers with AI Technology 🌿
+</footer>
+
+
+<script>
+function goToDiseasePage(card) {
+  const vegName = card.getAttribute("data-veg");
+  window.location.href = "Vegs/" + vegName + ".html";
+}
+</script>
+
+<script>
+async function getWeather() {
+  const city = document.getElementById("cityInput").value.trim();
+  const resultDiv = document.getElementById("weatherResult");
+
+  if (!city) {
+    resultDiv.innerHTML = "⚠️ Please enter a city name.";
+    return;
+  }
+
+  resultDiv.innerHTML = "⏳ Fetching weather...";
+
+  try {
+    const geoRes = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}`);
+    const geoData = await geoRes.json();
+
+    if (!geoData.results || geoData.results.length === 0) {
+      resultDiv.innerHTML = "❌ City not found.";
+      return;
+    }
+
+    const { latitude, longitude, name, country } = geoData.results[0];
+
+    const weatherRes = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`
+    );
+    const weatherData = await weatherRes.json();
+
+    const w = weatherData.current_weather;
+
+    resultDiv.innerHTML = `
+      🌍 <b>${name}, ${country}</b><br>
+      🌡️ <b>Temperature:</b> ${w.temperature}°C<br>
+      💨 <b>Wind Speed:</b> ${w.windspeed} km/h<br>
+      ⏱️ <b>Updated:</b> ${w.time}
+    `;
+  } catch (e) {
+    resultDiv.innerHTML = "❌ Error fetching data.";
+  }
+}
+</script>
+
+</body>
+</html>

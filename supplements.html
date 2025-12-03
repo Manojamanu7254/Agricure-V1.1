@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌿Supplements | AgriCure</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #c5edc5;
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      min-height: 100vh;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #0a7b25;
+    }
+    .navbar a {
+      color: white !important;
+      font-weight: 500;
+      margin: 0 10px;
+    }
+    .navbar a:hover {
+      text-decoration: underline;
+    }
+    .navbar p {
+      font-size: 30px;
+      color: white;
+    }
+
+    /* Header */
+    .header {
+      background: #a5d6a7;
+      text-align: center;
+      padding: 40px 20px;
+      border-radius: 0 0 20px 20px;
+    }
+    .header h1 {
+      font-weight: bold;
+      color: #000;
+    }
+
+    /* Supplement Card */
+    .supplement-card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .supplement-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .supplement-card img {
+      height: 220px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .supplement-card .card-body {
+      text-align: center;
+      background-color: #b0f4b2;
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .btn-learn {
+      background-color: #0a7b25;
+      color: white;
+      border-radius: 10px;
+      padding: 8px 20px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    .btn-learn:hover {
+      background-color: #06681e;
+      color: #fff;
+    }
+
+    /* Error Box */
+    .error-box {
+      text-align: center;
+      margin-top: 100px;
+    }
+    .error-box h3 {
+      color: red;
+      font-weight: bold;
+    }
+    .error-box button {
+      background-color: #0a7b25;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    /* Dropdown */
+    .dropdown-select {
+      text-align: center;
+      margin: 30px 0;
+    }
+    select {
+      padding: 10px;
+      border-radius: 10px;
+      border: 2px solid #0a7b25;
+      width: 250px;
+    }
+
+    footer {
+      text-align: center;
+      background: #e0e0e0;
+      padding: 15px;
+      color: #555;
+      margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <p>🌿AgriCure</p>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="Supplements.html">Supplements</a></li>
+          <li class="nav-item"><a class="nav-link" href="Login.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="Signup.html">Signup</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <div class="header">
+    <h1>🍃 Crop Supplements Information 🍃</h1>
+    <p>Select your crop to view recommended supplements.</p>
+  </div>
+
+  <!-- Error Section (hidden initially) -->
+  <div id="errorBox" class="error-box" style="display: none;">
+    <h3>⚠️ Access Denied</h3>
+    <p>You must be logged in to view supplement information.</p>
+    <button onclick="window.location.href='Login.html'">Go to Login</button>
+  </div>
+
+  <!-- Selection Section -->
+  <div id="mainContent" style="display:none;">
+    <div class="dropdown-select">
+      <h4>Select a Vegetable:</h4>
+      <select id="cropSelect" onchange="showSupplement()">
+        <option value="">-- Choose a Crop --</option>
+        <option value="tomato">Tomato</option>
+        <option value="beans">Beans</option>
+        <option value="corn">Corn</option>
+        <option value="capsicum">Capsicum</option>
+        <option value="brinjal">Brinjal</option>
+        <option value="cucumber">Cucumber</option>
+        <option value="peas">Peas</option>
+        <option value="pepper">Pepper</option>
+      </select>
+    </div>
+
+    <div id="supplementInfo"></div>
+  </div>
+
+  <footer>
+    © AgriCure 2025. Empowering Farmers with AI Technology 🌿
+  </footer>
+
+  <script>
+    // 🔐 Simulate login check (replace with real check in backend)
+    // Use localStorage.setItem("loggedIn", "true"); when user logs in
+    const isLoggedIn = localStorage.getItem("loggedIn");
+
+    const errorBox = document.getElementById("errorBox");
+    const mainContent = document.getElementById("mainContent");
+
+    if (isLoggedIn === "true") {
+      mainContent.style.display = "block";
+    } else {
+      errorBox.style.display = "block";
+    }
+
+    // Crop supplement data
+    const supplements = {
+      tomato: {
+        name: "Tomato",
+        img: "home_image/tomato.jpg",
+        desc: "Use Calcium Nitrate & Seaweed extract to improve fruit size and reduce rot."
+      },
+      beans: {
+        name: "Beans",
+        img: "home_image/Beans.jpg",
+        desc: "Rhizobium inoculants and Potassium boost growth and nitrogen fixation."
+      },
+      corn: {
+        name: "Corn",
+        img: "home_image/corn.jpg",
+        desc: "Apply NPK fertilizers (20:10:10) and Zinc sulfate for strong stalks & kernels."
+      },
+      capsicum: {
+        name: "Capsicum",
+        img: "home_image/Capsicum.jpg",
+        desc: "Use Humic acid and Potassium nitrate for bright color and high yield."
+      },
+      brinjal: {
+        name: "Brinjal",
+        img: "home_image/brinjal.jpg",
+        desc: "Apply Bio-fertilizers & micronutrients like Boron and Zinc to boost flowering."
+      },
+      cucumber: {
+        name: "Cucumber",
+        img: "home_image/cucumber.jpg",
+        desc: "Organic compost and NPK sprays help maintain water balance and growth."
+      },
+      peas: {
+        name: "Peas",
+        img: "home_image/Peas.png",
+        desc: "Use Phosphorus and Rhizobium culture to promote root nodulation."
+      },
+      pepper: {
+        name: "Pepper",
+        img: "home_image/pepper.jpg",
+        desc: "Calcium and Magnesium supplements strengthen fruit wall and yield."
+      }
+    };
+
+    // Function to show selected crop info
+    function showSupplement() {
+      const crop = document.getElementById("cropSelect").value;
+      const container = document.getElementById("supplementInfo");
+
+      if (crop && supplements[crop]) {
+        const item = supplements[crop];
+        container.innerHTML = `
+          <div class="supplement-card">
+            <img src="${item.img}" alt="${item.name}">
+            <div class="card-body">
+              <h5>${item.name}</h5>
+              <p>${item.desc}</p>
+              <a href="#" class="btn-learn">Learn More</a>
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = "";
+      }
+    }
+  </script>
+</body>
+</html>

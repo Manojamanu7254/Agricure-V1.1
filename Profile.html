@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - AgriCure</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body { font-family:Cambria; background:#f5f5f5; }
+    .profile-box {
+      max-width:420px; margin:60px auto; background:white;
+      padding:30px; border-radius:12px;
+      box-shadow:0 4px 20px rgba(0,0,0,0.2);
+    }
+    .profile-photo { width:120px; height:120px; border-radius:50%; object-fit:cover; border:2px solid green; }
+    input, select { margin-bottom:10px !important; }
+    .logout-btn { background:#c62828;color:white;border:none;padding:10px;width:100%;border-radius:8px;margin-top:10px; }
+  </style>
+</head>
+
+<body>
+
+<div class="profile-box text-center">
+  <h2 style="color:#0a7b25;">My Profile</h2>
+
+  <img id="profilePhoto" src="default-avatar.png" class="profile-photo mb-3">
+
+  <input type="file" id="photoInput" accept="image/*" class="form-control mb-3">
+
+  <input type="text" id="name" class="form-control" placeholder="Name">
+  <input type="email" id="email" class="form-control" placeholder="Email">
+  <input type="text" id="phone" class="form-control" placeholder="Phone Number">
+
+  <select id="farmerType" class="form-control">
+      <option value="">Select Farmer Type</option>
+      <option>Small Scale</option>
+      <option>Medium Scale</option>
+      <option>Commercial</option>
+  </select>
+
+  <input type="text" id="city" class="form-control" placeholder="City">
+  <input type="text" id="state" class="form-control" placeholder="State">
+
+  <button class="btn btn-success w-100 mt-2" onclick="saveProfile()">Save Profile</button>
+  <button class="logout-btn" onclick="logoutUser()">Logout</button>
+</div>
+
+<script>
+if (!localStorage.getItem("loggedIn")) {
+    alert("Please login first!");
+    window.location.href = "Login.html";
+}
+
+// Load stored data
+const data = JSON.parse(localStorage.getItem("userProfile")) || {};
+document.getElementById("name").value = data.name || "";
+document.getElementById("email").value = data.email || "";
+document.getElementById("phone").value = data.phone || "";
+document.getElementById("city").value = data.city || "";
+document.getElementById("state").value = data.state || "";
+document.getElementById("farmerType").value = data.farmerType || "";
+document.getElementById("profilePhoto").src = data.photo || "default-avatar.png";
+
+// Photo change
+document.getElementById("photoInput").addEventListener("change", function(){
+    const file = this.files[0];
+    const reader = new FileReader();
+    reader.onload = function(e){
+        document.getElementById("profilePhoto").src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+});
+
+// Save
+function saveProfile(){
+    const profile = {
+        name: document.getElementById("name").value.trim(),
+        email: document.getElementById("email").value.trim(),
+        phone: document.getElementById("phone").value.trim(),
+        farmerType: document.getElementById("farmerType").value,
+        city: document.getElementById("city").value.trim(),
+        state: document.getElementById("state").value.trim(),
+        photo: document.getElementById("profilePhoto").src
+    };
+
+    localStorage.setItem("userProfile", JSON.stringify(profile));
+    alert("Profile saved!");
+}
+
+// Logout
+function logoutUser(){
+    localStorage.removeItem("loggedIn");
+    alert("Logged out!");
+    window.location.href = "home.html";
+}
+</script>
+
+</body>
+</html>

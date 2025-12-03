@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tomato Disease Detection - AgriCure</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: 'Cambria', serif;
+      background: url('index_background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* only background color overlay, no blur */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(201, 249, 188, 0.6); /* same color tint */
+      z-index: 0;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      text-align: center;
+      padding: 40px 20px 20px 20px;
+      font-size: 30px;
+      font-weight: 600;
+      color: #02720d;
+      position: relative;
+      z-index: 5;
+    }
+
+    /* Disease gallery */
+    .disease-gallery {
+      position: relative;
+      z-index: 5;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin: 60px auto 40px auto;
+    }
+
+    .disease-gallery img {
+      width: 250px;
+      height: 200px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      filter: brightness(1.05) contrast(1.1); /* sharper, clear image */
+      cursor: pointer;
+    }
+
+    .disease-gallery img:hover {
+      transform: scale(1.08);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    }
+
+    /* Side-by-side content section */
+    .content-section {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin: 40px 20px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .description {
+      flex: 0 0 45%;       /* left section width */
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      min-height: 400px;
+    }
+
+    .description h2 {
+      margin-top: 0;
+      color: #03840c;
+    }
+
+    .container-box {
+      flex: 0 0 45%;       /* right section width */
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #0a7b25;
+      font-weight: 700;
+      margin-bottom: 30px;
+      font-size: 2rem;
+    }
+
+    /* Option cards */
+    .options {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+      margin-top: 20px;
+    }
+
+    .option {
+      background-color: white;
+      border-radius: 20px;
+      width: 180px;
+      height: 200px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      padding: 15px;
+    }
+
+    .option:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+    }
+
+    .option i {
+      font-size: 40px;
+      margin-bottom: 15px;
+      color: #0a7b25;
+    }
+
+    .option h4 {
+      font-size: 18px;
+      color: #0a7b25;
+      font-weight: 700;
+    }
+
+    #preview {
+      width: 100%;
+      max-width: 300px;
+      margin: 20px auto;
+      display: none;
+      border-radius: 12px;
+    }
+
+    #predict-btn {
+      display: none;
+      background-color: #0a7b25;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #predict-btn:hover {
+      background-color: #06681e;
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 768px) {
+      .content-section {
+        flex-direction: column;
+        align-items: center;
+      }
+      .description, .container-box {
+        flex: 0 0 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background overlay -->
+  <div class="overlay"></div>
+
+  <!-- Header -->
+  <header>🍅Protect Your Cucumber Plants</header>
+
+  <!-- Disease Images -->
+  <div class="disease-gallery">
+    <img src="disease_image/disease9.jpg" alt="Tomato Blight">
+    <img src="disease_image/disease10.jpg" alt="Leaf Spot">
+    <img src="disease_image/disease11.jpg" alt="Tomato Wilt">
+    <img src="disease_image/disease12.jpeg" alt="Mosaic Virus">
+  </div>
+
+  <!-- Side-by-side content: Description left, Heal Your Crops right -->
+  <div class="content-section">
+    <!-- Left: Description -->
+    <div class="description">
+      <h2>Disease Description</h2>
+      <p>
+        Select a disease image to see the description here. 
+        This section will show detailed information about symptoms, causes, and prevention methods 
+        to help you maintain healthy tomato crops.
+      </p>
+      <p>Tomato plants are highly sensitive to environmental changes and various pathogens. These diseases can affect the leaves, 
+        stems, roots, or fruits, causing problems such as yellowing, wilting, 
+        spots, mold, or rotting. If not treated early, even a small infection can spread quickly and damage the entire crop.
+      </p>
+      <p>
+        Most tomato diseases are caused by fungi, bacteria, or viruses that thrive 
+        in warm and humid conditions. They can spread through infected soil, 
+        contaminated tools, water splash, wind, insects, or even through human 
+        touch. Some diseases also stay 
+         in the soil for years, waiting for the right conditions to reappear.
+      </p>
+    </div>
+
+  
+
+
+      <input type="file" id="imageInput" accept="image/*" capture="environment" style="display:none" onchange="previewImage(event)">
+      <img id="preview" alt="Preview Image">
+      <br>
+      <button id="predict-btn" onclick="predictDisease()">🔍 Predict Disease</button>
+    </div>
+  </div>
+
+  <script>
+    // Check login
+   function goToDiseasePage(card) {
+    const vegName = card.getAttribute("data-veg");
+    window.location.href = "Vegs/" + vegName + ".html";
+}
+
+
+    function openCamera() {
+      document.getElementById('imageInput').click();
+    }
+
+    function previewImage(event) {
+      const preview = document.getElementById('preview');
+      preview.src = URL.createObjectURL(event.target.files[0]);
+      preview.style.display = 'block';
+      document.getElementById('predict-btn').style.display = 'inline-block';
+    }
+
+    function predictDisease() {
+      alert("🧠 Predicting disease... (backend integration coming soon)");
+    }
+
+    function showDiagnosis() {
+      alert("🍅 Showing tomato disease details (will be fetched dynamically)");
+    }
+
+    function showMedicine() {
+      alert("💊 Displaying recommended tomato medicines (backend integration pending)");
+    }
+  </script>
+
+  <script>
+    function openDiseasePage() {
+      // ✅ Use forward slashes in paths
+      window.location.href = '../related_disease/Tommato1.html';
+    }
+  </script>
+
+</body>
+</html>
